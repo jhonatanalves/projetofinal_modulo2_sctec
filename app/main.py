@@ -6,7 +6,8 @@ Execução (na raiz do projeto):
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
+from fastapi.responses import JSONResponse
 
 from app.core import config
 from app.routers import health, prediction
@@ -52,3 +53,16 @@ app = FastAPI(
 
 app.include_router(health.router)
 app.include_router(prediction.router)
+
+
+@app.exception_handler(Exception)
+async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
+    """Qualquer erro não previsto vira um 500 em JSON, com log completo no servidor.
+
+    O cliente recebe uma mensagem genérica (sem stack trace) e a API continua no ar.
+    """
+    logger.exception("Erro não tratado em %s %s", request.method, request.url.path)
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={"detail": "Erro interno ao processar a requisição."},
+    )
