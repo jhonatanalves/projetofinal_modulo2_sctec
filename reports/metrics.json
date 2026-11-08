@@ -1,7 +1,7 @@
 {
   "model_name": "logistic_regression",
   "model_version": "churn-logistic_regression-v1",
-  "trained_at": "2026-11-02T20:17:01+00:00",
+  "trained_at": "2026-11-03T23:18:30+00:00",
   "threshold": 0.5,
   "split": {
     "train": 4930,
@@ -17,11 +17,11 @@
       "roc_auc": 0.8395
     },
     "random_forest": {
-      "accuracy": 0.7604,
-      "precision": 0.5344,
-      "recall": 0.75,
-      "f1": 0.6241,
-      "roc_auc": 0.8364
+      "accuracy": 0.75,
+      "precision": 0.5188,
+      "recall": 0.7893,
+      "f1": 0.6261,
+      "roc_auc": 0.8359
     }
   },
   "test": {
