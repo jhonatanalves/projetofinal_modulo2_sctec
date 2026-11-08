@@ -95,3 +95,9 @@ class HealthResponse(BaseModel):
     model_loaded: bool = Field(..., description="Indica se o modelo está carregado na memória RAM.")
     model_version: str | None = Field(default=None, description="Versão do modelo em memória.")
     api_version: str = Field(..., description="Versão da API.")
+
+
+class ErrorResponse(BaseModel):
+    """Formato padrão das respostas de erro 400, 500 e 503."""
+
+    detail: str = Field(..., description="Mensagem explicando o erro.")
